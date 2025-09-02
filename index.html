@@ -1,77 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Macrohard Countdown</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0a0f2c, #1c2351);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      text-align: center;
-    }
-    .container {
-      background: rgba(0,0,0,0.4);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-    #countdown {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-    .promo {
-      margin-top: 30px;
-      font-size: 1.2rem;
-      color: #00d4ff;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>🚀 Macrohard Launch Countdown 🚀</h1>
-    <div id="countdown">Loading...</div>
-    <div class="promo">
-      The future of finance is being built on the Stellar Network 🌌
+    <img src="images/logo.png" alt="Macrohard Logo" class="logo">
+    <h1>🚀 Macrohard Token Launch 🚀</h1>
+    <p>The future of finance on Stellar Network</p>
+
+    <div id="countdown">
+      <div><span id="days"></span>Days</div>
+      <div><span id="hours"></span>Hours</div>
+      <div><span id="minutes"></span>Minutes</div>
+      <div><span id="seconds"></span>Seconds</div>
     </div>
+
+    <a href="https://lobstr.co/swap/native/Macrohard:GD73SAHCYBQ3CWD76UMJHDPLUUKIXELXWPLZVNLMW2DQZJQLYOWP45TO" class="btn">🔗 Buy on Lobstr</a>
   </div>
 
-  <script>
-    // Set target date
-    const targetDate = new Date("2025-09-04T23:59:59").getTime();
-
-    const countdown = document.getElementById("countdown");
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-
-      if (distance < 0) {
-        countdown.innerHTML = "🎉 Macrohard is Live!";
-        clearInterval(interval);
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-
-    const interval = setInterval(updateCountdown, 1000);
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
