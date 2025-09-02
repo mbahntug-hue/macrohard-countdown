@@ -2,130 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Macrohard Token Countdown</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Macrohard Countdown</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: radial-gradient(circle at center, #0a0f2c, #000);
+      background: linear-gradient(135deg, #0a0f2c, #1c2351);
       color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      overflow: hidden;
+      margin: 0;
       text-align: center;
     }
     .container {
-      max-width: 650px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-      position: relative;
-      z-index: 2;
+      background: rgba(0,0,0,0.4);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
     }
     h1 {
-      font-size: 2.2em;
-      margin-bottom: 10px;
-    }
-    p {
-      color: #bbb;
-      margin-bottom: 15px;
-    }
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
+      font-size: 2.5rem;
       margin-bottom: 20px;
     }
-    .time-box {
-      background: rgba(255,255,255,0.1);
-      padding: 15px;
-      border-radius: 12px;
-      min-width: 70px;
-    }
-    .time-box span {
-      display: block;
-      font-size: 2em;
+    #countdown {
+      font-size: 2rem;
       font-weight: bold;
-    }
-    .label {
-      font-size: 0.8em;
-      color: #aaa;
-      margin-top: 5px;
-    }
-    .finished {
-      font-size: 1.5em;
-      color: #0ff;
       margin-top: 20px;
     }
     .promo {
-      margin-top: 20px;
-      font-size: 1.1em;
-      color: #0ff;
-      font-weight: bold;
-      text-shadow: 0 0 8px rgba(0,255,255,0.6);
-    }
-    .qr {
-      margin-top: 20px;
-    }
-    .qr img {
-      width: 150px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,255,255,0.5);
-    }
-    /* Stellar logo background */
-    .stellar-logo {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      opacity: 0.1;
-      width: 150px;
-      z-index: 1;
+      margin-top: 30px;
+      font-size: 1.2rem;
+      color: #00d4ff;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Stellar_Symbol.png" class="stellar-logo" alt="Stellar Logo" />
-    
-    <h1>🚀 Macrohard presale Live 🚀</h1>
-    <p>Counting down to liftoff on Stellar Network</p>
-    
-    <div class="countdown" id="countdown">
-      <div class="time-box"><span id="days">00</span><div class="label">Days</div></div>
-      <div class="time-box"><span id="hours">00</span><div class="label">Hours</div></div>
-      <div class="time-box"><span id="minutes">00</span><div class="label">Minutes</div></div>
-      <div class="time-box"><span id="seconds">00</span><div class="label">Seconds</div></div>
-    </div>
-    <div id="finished" class="finished"></div>
-
+    <h1>🚀 Macrohard Launch Countdown 🚀</h1>
+    <div id="countdown">Loading...</div>
     <div class="promo">
-      🌐 The Future of Finance on the Stellar Network 🌐<br/>
-      Be part of Macrohard — the next revolution in crypto!
-    </div>
-
-    <div class="qr">
-      <p>📲 Scan with Lobstr to access Macrohard</p>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://lobstr.co/swap/native/Macrohard:GD73SAHCYBQ3CWD76UMJHDPLUUKIXELXWPLZVNLMW2DQZJQLYOWP45TO" alt="QR Code Lobstr">
+      The future of finance is being built on the Stellar Network 🌌
     </div>
   </div>
 
   <script>
-    // Set Macrohard launch date
-    const launchDate = new Date("2025-09-03T20:00:00+07:00").getTime();
+    // Set target date
+    const targetDate = new Date("2025-09-04T23:59:59").getTime();
+
+    const countdown = document.getElementById("countdown");
 
     function updateCountdown() {
       const now = new Date().getTime();
-      const distance = launchDate - now;
+      const distance = targetDate - now;
 
-      if (distance <= 0) {
-        document.getElementById("countdown").style.display = "none";
-        document.getElementById("finished").innerText = "✨ Macrohard is LIVE! ✨";
-        clearInterval(timer);
+      if (distance < 0) {
+        countdown.innerHTML = "🎉 Macrohard is Live!";
+        clearInterval(interval);
         return;
       }
 
@@ -134,14 +68,10 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      document.getElementById("days").innerText = days;
-      document.getElementById("hours").innerText = String(hours).padStart(2, "0");
-      document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
-      document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
+      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
-    const timer = setInterval(updateCountdown, 1000);
-    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
