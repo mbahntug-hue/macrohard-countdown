@@ -4,24 +4,92 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Macrohard Countdown</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa') no-repeat center center/cover;
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+    }
+
+    #countdown {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px 25px;
+      border-radius: 10px;
+    }
+
+    a {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #06f;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    a:hover {
+      background: #0051cc;
+    }
+
+    img {
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <img src="images/logo.png" alt="Macrohard Logo" class="logo">
-    <h1>🚀 Macrohard Token Launch 🚀</h1>
-    <p>The future of finance on Stellar Network</p>
+  <img src="https://cryptologos.cc/logos/stellar-xlm-logo.png" alt="Macrohard Logo" width="120">
+  <h1>🚀 Macrohard Token Launch 🚀</h1>
+  <p>The future of finance on Stellar Network</p>
+  
+  <div id="countdown"></div>
 
-    <div id="countdown">
-      <div><span id="days"></span>Days</div>
-      <div><span id="hours"></span>Hours</div>
-      <div><span id="minutes"></span>Minutes</div>
-      <div><span id="seconds"></span>Seconds</div>
-    </div>
+  <a href="https://lobstr.co" target="_blank">🚀 Buy on Lobstr</a>
 
-    <a href="https://lobstr.co/swap/native/Macrohard:GD73SAHCYBQ3CWD76UMJHDPLUUKIXELXWPLZVNLMW2DQZJQLYOWP45TO" class="btn">🔗 Buy on Lobstr</a>
-  </div>
+  <script>
+    // Set launch date (contoh: 5 September 2025)
+    var launchDate = new Date("Sep 5, 2025 12:00:00").getTime();
 
-  <script src="script.js"></script>
+    var timer = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = launchDate - now;
+
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        days + " Days " + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds ";
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "🎉 Macrohard Token Launched!";
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
